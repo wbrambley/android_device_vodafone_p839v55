@@ -33,8 +33,7 @@ TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 
 # Kernel
-TARGET_PREBUILT_KERNEL := device/vodafone/p839v55/kernel
-#TARGET_KERNEL_SOURCE := kernel/vodafone/p839v55
+TARGET_KERNEL_SOURCE := kernel/vodafone/p839v55
 TARGET_KERNEL_CONFIG := msm_P839V55_defconfig
 TARGET_KERNEL_ARCH := arm
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.selinux=permissive androidboot.hardware=qcom user_debug=30 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1
