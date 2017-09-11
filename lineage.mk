@@ -11,5 +11,7 @@ $(call inherit-product, device/vodafone/p839v55/full_p839v55.mk)
 PRODUCT_DEVICE := p839v55
 PRODUCT_NAME := lineage_p839v55
 PRODUCT_BRAND := Vodafone
-Product_MANUFACTURER := Vodafone
+PRODUCT_MANUFACTURER := Vodafone
 PRODUCT_RELEASE_NAME := Smart Ultra 6
+
+PRODUCT_GMS_CLIENTID_BASE := android-zte
