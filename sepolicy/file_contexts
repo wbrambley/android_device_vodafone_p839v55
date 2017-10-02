@@ -8,3 +8,5 @@
 /dev/akm09911                                   u:object_r:sensors_device:s0
 /dev/akm09911_dev                               u:object_r:sensors_device:s0
 /dev/lis3dh                                     u:object_r:sensors_device:s0
+
+/data/misc/sensor(/.*)?                    u:object_r:sensors_data_file:s0
