@@ -26,7 +26,7 @@
 #
 
 import init.qcom.usb.rc
-import init.target.rc
+import init.target.ftm.rc
 import init.qcom.factory.rc
 
 on early-init
@@ -50,16 +50,6 @@ on init
     # Support legacy paths
     symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
-
-    # Full speed for boot up
-    write /sys/devices/system/cpu/cpu1/online 1
-    write /sys/devices/system/cpu/cpu2/online 1
-    write /sys/devices/system/cpu/cpu3/online 1
-    write /sys/module/msm_thermal/core_control/enabled 0
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "performance"
-    write /sys/module/msm_thermal/core_control/enabled 1
-    write /sys/class/devfreq/1c00000.qcom,kgsl-3d0/governor "performance"
-    write /sys/class/devfreq/qcom,cpubw.30/governor "performance"
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
@@ -100,15 +90,6 @@ on boot
 
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/device/extldo
     chmod 0660 /sys/class/rfkill/rfkill0/device/extldo
-
-# Enable writing to led blink node from userspace
-    chown system system /sys/class/leds/bln/device/mode
-    chown system system /sys/class/leds/bln/device/enable
-    chown system system /sys/class/leds/bln/brightness
-    chown system system /sys/class/leds/flashlight/brightness
-    chown system system /sys/class/leds/flashlight-front/brightness
-    chown system camera /sys/class/leds/torch-light0/brightness
-    chmod 0660 /sys/class/leds/torch-light0/brightness
 
     #Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
@@ -199,6 +180,9 @@ on boot
     # Allow access for CCID command/response timeout configuration
     chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
 
+    setprop sys.usb.config diag,adb
+
+    start firmware_update
 # msm specific files that need to be created on /data
 on post-fs-data
     # Create directory for TZ Apps
@@ -234,10 +218,6 @@ on post-fs-data
 
     # Create directory used by the DASH client
     mkdir /data/misc/dash 0770 media audio
-
-    # Create directory used by display clients
-    mkdir /data/misc/display 0770 system graphics
-    mkdir /persist/display 0770 system graphics
 
     # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
     # We chown/chmod /persist again so because mount is run as root + defaults
@@ -454,7 +434,7 @@ service dpmd /system/bin/dpmd
     class late_start
     socket dpmd stream 660 root system
 
-service irsc_util /system/bin/irsc_util "/etc/sec_config"
+service irsc_util /system/bin/logwrapper /system/bin/irsc_util "/etc/sec_config"
     class main
     user root
     oneshot
@@ -567,7 +547,7 @@ service qmuxd /system/bin/qmuxd
     class main
     user root
     group radio audio bluetooth gps nfc qcom_diag
-#    disabled
+    disabled
 
 service netmgrd /system/bin/netmgrd
     class main
@@ -592,14 +572,11 @@ service qti /system/vendor/bin/qti
     group radio net_raw qcom_diag usb net_admin
     disabled
 
-service sensord /system/bin/sensord
+service sensors /system/bin/sensors.qcom
     class late_start
     user root
     group root
     disabled
-    
-on property:init.svc.zygote=restarting
-    restart sensord
 
 on property:ro.use_data_netmgrd=false
     # netmgr not supported on specific target
@@ -640,7 +617,7 @@ service p2p_supplicant /system/bin/wpa_supplicant \
     -I/system/etc/wifi/p2p_supplicant_overlay.conf -N \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
     -I/system/etc/wifi/wpa_supplicant_overlay.conf \
-    -O/data/misc/wifi/sockets -puse_p2p_group_interface=1 \
+    -O/data/misc/wifi/sockets -puse_p2p_group_interface=1 -dd \
     -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
 #   we will start as root and wpa_supplicant will switch to user wifi
 #   after setting up the capabilities required for WEXT
@@ -654,7 +631,7 @@ service p2p_supplicant /system/bin/wpa_supplicant \
 service wpa_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
     -I/system/etc/wifi/wpa_supplicant_overlay.conf \
-    -O/data/misc/wifi/sockets \
+    -O/data/misc/wifi/sockets -dd \
     -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
     #   we will start as root and wpa_supplicant will switch to user wifi
     #   after setting up the capabilities required for WEXT
@@ -834,12 +811,12 @@ on property:sys.boot_completed=1
     start atfwd
 
 # zte_fky_20141216 modify the dir to /data/misc/wifi/hostapd.conf in hostapd in code
-service hostapd /system/bin/hostapd -dd /data/hostapd/hostapd.conf
-    class late_start
-    user root
-    group root
-    oneshot
-    disabled
+#service hostapd /system/bin/hostapd -dd /data/hostapd/hostapd.conf
+#    class late_start
+#    user root
+#    group root
+#    oneshot
+#    disabled
 
 service ds_fmc_appd /system/bin/ds_fmc_appd -p "rmnet0" -D
     class late_start
@@ -913,7 +890,6 @@ service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw
 
 service fuse_uicc0 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/uicc0 /storage/uicc0
     class late_start
-    disabled	
 
 service fuse_uicc1 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/uicc1 /storage/uicc1
     class late_start
@@ -999,11 +975,6 @@ on property:persist.sys.rootagent=1
 on property:persist.sys.rootagent=0
     stop rootagent
 
-service bms-sh /system/bin/sh /init.qcom.bms.sh
-    class main
-    user root
-    oneshot
-
 service vm_bms /system/bin/vm_bms
     user root
     group root
@@ -1061,4 +1032,4 @@ service firmware_update /system/bin/firmware_update 1
     class late_start
     user root
     oneshot
-# added by chenhui for cywee SENSORHUB firmware_end	
+# added by chenhui for cywee SENSORHUB firmware_end
