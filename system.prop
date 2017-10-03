@@ -36,6 +36,7 @@ persist.loc.nlp_name=com.qualcomm.location
 ro.gps.agps_provider=1
 ro.qcom.ad=1
 ro.qcom.ad.calib.data=/system/vendor/etc/calib_v55.cfg
+ro.config.zram=true
 
 # Art
 dalvik.vm.dex2oat-flags=--no-watch-dog
