@@ -263,6 +263,15 @@ PRODUCT_PACKAGES += \
     librmnetctl \
     libxml2
 
+# Sensors
+PRODUCT_PACKAGES += \
+    android.hardware.sensors@1.0-impl \
+    libjni_proximityCalibrate \
+    ProximityCalibrate \
+    sensors.msm8916 \
+    libcalmodule_common \
+    calmodule.cfg
+
 # Wifi
 PRODUCT_PACKAGES += \
     libcurl \
