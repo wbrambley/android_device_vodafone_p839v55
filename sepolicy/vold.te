@@ -1,0 +1,2 @@
+allow vold persist_file:dir { getattr read };
+allow vold vold_tmpfs:file create_file_perms;
