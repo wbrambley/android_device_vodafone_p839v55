@@ -2,14 +2,22 @@
 TARGET_SCREEN_HEIGHT := 1280
 TARGET_SCREEN_WIDTH := 720
 
-# Inherit some common CM stuff
-$(call inherit-product, vendor/cm/config/common_full_phone.mk)
-
-# Inherit device configuration
 $(call inherit-product, device/vodafone/p839v55/full_p839v55.mk)
 
-PRODUCT_DEVICE := p839v55
+# Inherit some common LineageOS stuff.
+$(call inherit-product, vendor/cm/config/common_full_phone.mk)
+
+# Inherit some common LineageOS stuff.
+$(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
+
+# Must define platform variant before including any common things
+TARGET_BOARD_PLATFORM_VARIANT := msm8916
+
 PRODUCT_NAME := lineage_p839v55
-PRODUCT_BRAND := Vodafone
-Product_MANUFACTURER := Vodafone
-PRODUCT_RELEASE_NAME := Smart Ultra 6
+BOARD_VENDOR := vodafone
+PRODUCT_DEVICE := p839v55
+
+PRODUCT_GMS_CLIENTID_BASE := android-zte
+
+TARGET_VENDOR_PRODUCT_NAME := p839v55
+TARGET_VENDOR_DEVICE_NAME := p839v55
