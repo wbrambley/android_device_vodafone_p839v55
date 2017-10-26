@@ -16,8 +16,8 @@
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
-$(call inherit-product frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
-$(call inherit-product frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
+#$(call inherit-product frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
+#$(call inherit-product frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
@@ -47,6 +47,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml\
     frameworks/native/data/etc/android.software.midi.xml:system/etc/permissions/android.software.midi.xml\
     external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:system/etc/permissions/com.dsi.ant.antradio_library.xml\
+    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
+
         
     
 # Audio
@@ -116,6 +118,7 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm8916 \
     libtinyxml\
     memtrack.msm8916
+    
 
 # Ebtables
 PRODUCT_PACKAGES += \
@@ -221,13 +224,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/nfc/nfcee_access.xml:system/etc/nfcee_access.xml\
     frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml\
     frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml\
-    frameworks/base/nfc-extras/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml\
-    frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml\
-    frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml\
-    frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml\
-    frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml\
-    frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml\
-    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
+    frameworks/base/nfc-extras/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml
     
 
 # Power HAL
