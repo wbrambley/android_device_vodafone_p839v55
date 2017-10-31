@@ -31,9 +31,6 @@ dalvik.vm.isa.arm.variant=cortex-a53
 dalvik.vm.isa.arm.features=default
 net.bt.name=SmartUltra
 dalvik.vm.stack-trace-file=/data/anr/traces.txt
-persist.gps.qc_nlp_in_use=1
-persist.loc.nlp_name=com.qualcomm.location
-ro.gps.agps_provider=1
 ro.qcom.ad=1
 ro.qcom.ad.calib.data=/system/vendor/etc/calib_v55.cfg
 ro.config.zram=true
@@ -113,10 +110,12 @@ persist.debug.wfd.enable=1
 persist.hwc.enable_vds=1
 
 # GPS
-persist.gps.qc_nlp_in_use=0
 ro.gps.agps_provider=1
-ro.qc.sdk.izat.premium.enabled=0
-ro.qc.sdk.izat.service_mask=0x0
+ro.qc.sdk.izat.premium.enabled=1
+ro.qc.sdk.izat.service_mask=0x5
+persist.gps.qc_nlp_in_use=1
+persist.loc.nlp_name=com.qualcomm.location
+ro.gps.agps_provider=1
 
 # HWUI
 ro.hwui.text_large_cache_height=2048
