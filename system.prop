@@ -13,10 +13,6 @@ persist.sys.ztelog.enable=0
 ro.setupwizard.mode=OPTIONAL
 ro.com.google.gmsversion=6.0_r6
 ro.com.google.clientidbase=android-zte
-ro.com.google.clientidbase.ms=android-zte
-ro.com.google.clientidbase.yt=android-zte
-ro.com.google.clientidbase.am=android-zte
-ro.com.google.clientidbase.gmm=android-zte
 keyguard.no_require_sim=true
 ro.com.android.dataroaming=true
 ro.vendor.extension_library=libqti-perfd-client.so
@@ -38,7 +34,6 @@ ro.config.zram=true
 # Art
 dalvik.vm.dex2oat-flags=--no-watch-dog
 ro.sys.fw.dex2oat_thread_count=4
-ro.config.max_starting_bg=8
 
 # ActivityManager
 ro.config.max_starting_bg=8
@@ -72,8 +67,10 @@ ro.qualcomm.bt.hci_transport=smd
 ro.qualcomm.cabl=0
 
 # CNE
-persist.cne.feature=4
-persist.cne.nsrm.bkg.evt=3955
+persist.cne.feature=0
+#persist.cne.nsrm.bkg.evt=3955
+persist.cne.nsrm.mode=false
+#persist.cne.override.memlimit=1
 
 # Data module
 persist.data.netmgrd.qos.enable=true
@@ -85,7 +82,7 @@ debug.sf.gpu_comp_tiling=1
 debug.mdpcomp.idletime=600
 persist.hwc.mdpcomp.enable=true
 persist.hwc.ptor.enable=true
-#ro.opengles.version=196608
+ro.opengles.version=196610
 debug.enable.sglscale=1
 vidc.enc.narrow.searchrange=1
 ro.sf.lcd_density=480
@@ -115,7 +112,6 @@ ro.qc.sdk.izat.premium.enabled=1
 ro.qc.sdk.izat.service_mask=0x5
 persist.gps.qc_nlp_in_use=1
 persist.loc.nlp_name=com.qualcomm.location
-ro.gps.agps_provider=1
 
 # HWUI
 ro.hwui.text_large_cache_height=2048
@@ -176,6 +172,7 @@ ro.telephony.call_ring.multiple=false
 ro.telephony.default_network=9
 ro.use_data_netmgrd=true
 telephony.lteOnCdmaDevice=0
+ro.ril.enable.amr.wideband=1
 
 # Time
 persist.timed.enable=true
