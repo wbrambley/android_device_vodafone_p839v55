@@ -37,6 +37,11 @@ ro.qualcomm.bt.hci_transport=smd
 # Cabl
 ro.qualcomm.cabl=0
 
+# Camera
+camera2.portability.force_api=1
+media.stagefright.legacyencoder=true
+media.stagefright.less-secure=true
+
 # CNE
 persist.cne.feature=4
 persist.cne.nsrm.bkg.evt=3955
