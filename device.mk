@@ -154,7 +154,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/sap.conf:system/etc/sap.conf
 
 PRODUCT_PACKAGES += \
-    gps.default
+    gps.msm8916
 
 # IRSC
 PRODUCT_COPY_FILES += \
