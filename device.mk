@@ -17,8 +17,8 @@
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
  
-$(call inherit-product frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
-$(call inherit-product frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
+#$(call inherit-product frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
+#$(call inherit-product frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
@@ -88,9 +88,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:system/etc/permissions/com.dsi.ant.antradio_library.xml
 
-# Camera
+    # Camera
 PRODUCT_PACKAGES += \
-    Snap
+    camera.msm8916 \
+    libmm-qcamera \
+    Snap \
+    libbson
 
 # Charger
 PRODUCT_PACKAGES += \
@@ -114,7 +117,16 @@ PRODUCT_PACKAGES += \
     gralloc.msm8916 \
     hwcomposer.msm8916 \
     libtinyxml \
-    memtrack.msm8916
+    memtrack.msm8916 \
+    libvulkan \
+    vkinfo \
+    vulkan.default \
+    liboverlay \
+    frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml \
+    frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:system/etc/permissions/android.hardware.vulkan.level-0.xml \
+    frameworks/native/data/etc/android.hardware.vulkan.level-1.xml:system/etc/permissions/android.hardware.vulkan.level-1.xml \
+    frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:system/etc/permissions/android.hardware.vulkan.version-1_0_3.xml \
+    
 
 # Ebtables
 PRODUCT_PACKAGES += \
@@ -142,7 +154,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/sap.conf:system/etc/sap.conf
 
 PRODUCT_PACKAGES += \
-    gps.msm8916
+    gps.default
 
 # IRSC
 PRODUCT_COPY_FILES += \
@@ -168,6 +180,8 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:system/etc/media_codecs_google_video_le.xml \
+    
 
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
